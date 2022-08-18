@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EMPLOYEES PAGE</title>
+
+    <!--     STYLEESHEET-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+
+    <!--    BOOTSTRAP SCRIPTS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+            integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center mb-3">EMPLOYEES LIST</h1>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">FullName</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">DELETE</th>
+                    <th scope="col">UPDATE</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee:${employees}">
+                    <td>[[${employee.id}]]</td>
+                    <td th:text="${employee.fullname}"></td>
+                    <td th:text="${employee.salary}"></td>
+                    <td th:text="${employee.position.name}"></td>
+
+                    <td>
+                        <a th:href="@{'/employees/delete/' + ${employee.id}}"><i class="fa-solid fa-user-xmark text-danger" style="font-size: 25px"></i></a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/employees/edit/' + ${employee.id}}"><i class="fa-solid fa-pen-to-square text-primary" style="font-size: 25px"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="container text-center">
+
+                <a href="/employees/new" class="btn btn-outline-primary">ADD EMPLOYEE</a>
+                <a href="/" class="btn btn-outline-danger">BACK</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

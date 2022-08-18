@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>POSITIONS ADD PAGE</title>
+
+    <!--     STYLEESHEET-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+
+    <!--    BOOTSTRAP SCRIPTS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+            integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:if="${positions.id == null}">
+    <h1 class="text-center mb-3">ADD POSITION</h1>
+</div>
+
+<div th:unless="${positions.id == null}">
+    <h1 class="text-center mb-3">UPDATE POSITION</h1>
+</div>
+
+
+<form th:action="@{/positions/save}" th:object="${positions}" method="post">
+    <div style="margin-top: 30px; margin-bottom: 400px; margin-right: 400px; margin-left: 400px">
+        <input type="hidden" th:field="*{id}" th:value="${positions.id}">
+        <div class="form-group">
+            <label for="exampleInputEmail1">NAME</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{name}" required>
+        </div>
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-outline-warning">SAVE</button>
+            <a href="/positions" class="btn btn-outline-danger">BACK</a>
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>

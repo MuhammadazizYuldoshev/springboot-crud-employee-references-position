@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EMPLOYEES ADD FORM</title>
+
+    <!--     STYLEESHEET-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+
+    <!--    BOOTSTRAP SCRIPTS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+            integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:if="${employees.id == null}">
+<h1 class="text-center mb-3">ADD EMPLOYEE</h1>
+</div>
+
+<div th:unless="${employees.id == null}">
+    <h1 class="text-center mb-3">UPDATE EMPLOYEE</h1>
+</div>
+
+<form th:action="@{/employees/save}" th:object="${employees}" method="post">
+    <div style="margin-top: 30px; margin-bottom: 400px; margin-right: 400px; margin-left: 400px">
+        <input type="hidden" th:field="*{id}" th:value="${employees.id}">
+        <div class="form-group">
+            <label for="exampleInputEmail1">FULL NAME</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{fullname}" required>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">SALARY</label>
+            <input type="number" min="0" class="form-control" id="exampleInputPassword1" th:field="*{salary}" required>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword" >POSITION</label>
+            <select th:field="*{position}" class="form-control" id="exampleInputPassword" >
+                <th:block th:each="position:${positions}">
+                    <option th:text="${position.name}" th:value="${position.id}">
+                </th:block>
+
+            </select>
+        </div>
+
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-outline-warning">SAVE</button>
+            <a href="/employees" class="btn btn-outline-danger">BACK</a>
+        </div>
+    </div>
+
+</form>
+
+
+</body>
+</html>
